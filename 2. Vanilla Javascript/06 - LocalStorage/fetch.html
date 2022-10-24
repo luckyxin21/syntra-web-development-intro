@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <title>fetch</title>
+    <h1>url</h1>
+    <ul id="url"></ul>
+  </head>
+  <body></body>
+</html>
+<script>
+  debugger
+   promise =  fetch('https://api.chucknorris.io/jokes/random');
+   promise.then((data)=>{
+    return data.json();
+   })
+   .then((data)=>{
+    const randomIndex =Math.floor(Math.random*15);
+    const category = data[randomIndex];
+    return fetch (https://api.chucknorris.io/jokes/random ? catagory${category})
+   })
+   .then((data)=>{
+    return data.json();
+   })
+   .then((data)=>{
+    const div = document.createElement("div");
+  div.innerHTML= `
+  <div>catagory:
+    <b>$(data
+      document.querySelector("div").appendChild("div");)
+
+  `}
+  .catch((err)=>{
+    console.log(err);
+  });
+</script>

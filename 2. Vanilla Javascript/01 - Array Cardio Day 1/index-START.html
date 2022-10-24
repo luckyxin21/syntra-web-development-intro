@@ -72,21 +72,68 @@
       ];
 
       // 1. Filter the list of inventors for those who were born in the 1500's
+      const fifteen = inventors.filter(
+        (inv) => inv.year > 1500 && inv.year < 1600
+      );
+      console.log(fifteen);
+      //-------------------------------------------------------------------------------------
+      let newIventor = inventors.filter(born1500);
+      function born1500(inventor) {
+        if (inventor.year > 1500 && inventor.year < 1600) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+      console.log(newIventor);
 
       // 2. Give us an array of the inventors first and last names
+      const fullName = inventors.map((inv) => inv.first + " " + inv.last);
+      console.log(fullName);
 
       // 3. Sort the inventors by birthdate, oldest to youngest
+      const ordered = inventors.sort((a, b) => {
+        if (a.year > b.year) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+      console.log(ordered);
+      //----------------------------------------------------------------------------------
+      const ordere = inventors.sort((a, b) => {
+        a.year > b.year ? 1 : -1;
+      });
+      console.log(ordere);
 
       // 4. How many years did all the inventors live all together?
+      const totalYears = inventors.reduce(
+        (total, inv) => total + (inv.passed - inv.year),
+        0
+      );
+
+      console.log(totalYears);
 
       // 5. Sort the inventors by years lived
+      const oldest = inventors.sort((a, b) =>
+        a.passed - a.year > b.passed - b.year ? 1 : -1
+      );
+      console.table(oldest);
+      console.log("ok");
 
       // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
       // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
-      // Sort the people alphabetically by last name
+      //const div = document.querySelector(".mw-category");
+      //const a = Array.from(div.querySelectorAll("a"));
+      //console.log(a);
+      //const de = links
+      //  .map((link) => link.innerText)
+      //  .filter((streetName) => streetName.includes("de"));
+      //console.log(de);
+      // 7. Sort the people alphabetically by last name
 
-      // Sum up the instances of each of these
+      //8. Sum up the instances of each of these
       const data = [
         "car",
         "car",
@@ -103,6 +150,46 @@
         "car",
         "truck",
       ];
+      //const transportation = data.reduce(function (obj, item) {
+      //  if (!obj[item]) {
+      //    obj[item] = 0;
+      //  }
+
+      //  obj[item]++;
+
+      //  return obj;
+      //}, {});
+
+      //console.log(transportation);
+      const allNames = data.reduce(function (allNames, name) {
+        if (name in allNames) {
+          allNames[name]++;
+        } else {
+          allNames[name] = 1;
+        }
+        return allNames;
+      }, {});
+      console.log(allNames);
+      //------------------
+      const promise = fetch("http://api.chucknorris.io/jokes/random");
+      promise.then((data) => {
+        return data.json();
+      });
+      //  .then((data) => {
+      //    console.log(data);
+      //  })
+      //  .catch((err) => {
+      //    console.log(err);
+      //  });
+      //fetch('url=')
+      //promise
+      //  .then((data) => {
+      //    return data.json();
+      //  })
+      //  .then((data) => {
+      //    const randomIndex = Math.floor(Math.random() * 15);
+      //    const Category = data;
+      //  });
     </script>
   </body>
 </html>
