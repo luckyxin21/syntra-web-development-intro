@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hero Details</title>
+  </head>
+  <body>
+    <script>
+            //console.log(window.location.search);
+            const id = window.location.search.split("?id")[1];
+            const heroes = JSON.parse(window.localStorage.getItem("heroes") || "[]");
+            const hero = heroes.find((hero) => hero.id === parseInt("id"));
+            const banner = document.querySelector(".heroes");
+            function getImage(thumnail, ext) {
+              return `${thumbnail}/portrait_xlarge.${ext}`;
+            }
+            banner.innerHTML = `<div>${hero.name}</div><img src="${getImage(
+              hero.thumbnail.path,
+              hero.thumbnail.extension
+            )} />    `;
+            const playedSeries = hero.series.items;
+            playedSeries.forEach((serie) => {
+              const card = `
+      <section class="hero" data-hero-id=${hero.id}>
+        <p>$${serie.name}</p>
+       </ section>
+        `;
+        const
+            });
+    </script>
+  </body>
+</html>
