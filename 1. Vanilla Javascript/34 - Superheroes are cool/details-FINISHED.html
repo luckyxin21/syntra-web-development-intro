@@ -7,41 +7,31 @@
     <link rel="stylesheet" href="./styles.css" />
     <title>Hero Details</title>
   </head>
-
+  <section class="hero-banner"></section>
+  <section class="heroes"></section>
   <body>
-    <section class="hero-banner"></section>
-    <section class="heroes"></section>
-
     <script>
       const id = window.location.search.split("?id=")[1];
-      const heroes = JSON.parse(window.localStorage.getItem("heroes"));
+      const heroes = JSON.parse(window.localStorage.getItem("heroes") || "[]");
       const hero = heroes.find((hero) => hero.id === parseInt(id));
       const banner = document.querySelector(".hero-banner");
       const heroesDiv = document.querySelector(".heroes");
-
-      console.log(heroes);
-      console.log(window.location.search);
-      console.log(id);
-      //console.log(hero.id);同上效果相同
       function getImage(thumbnail, ext) {
-        return `${thumbnail}/portrait_xlarge.${ext} `;
+        return `${thumbnail}/portrait_xlarge.${ext}`;
       }
       banner.innerHTML = `<div>${hero.name}</div><img src="${getImage(
         hero.thumbnail.path,
         hero.thumbnail.extension
-      )}" /> `;
-
+      )}" />`;
       const playedSeries = hero.series.items;
       console.log(playedSeries);
       playedSeries.forEach((serie) => {
         const serieId = serie.resourceURI.split("series/")[1];
-        //console.log(serieId);
         const card = `
         <section class="hero" data-hero-id=${serieId}>
-      <a href="series-START.html?id=${serieId}">${serie.name}</a>
+          <a href="series-FINISHED.html?id=${serieId}">${serie.name}</a>
         </section>
-      `;
-
+        `;
         const element = document.createElement("div");
         element.innerHTML = card;
         heroesDiv.appendChild(element);

@@ -15,7 +15,6 @@
       const heroes = document.querySelector(".heroes");
       const publicKey = "fc8a583c663a38d67fb5bcef4a50674a";
       const hash = "35915bac577ae9c71f2ea0631f1d50de";
-
       const ts = 1;
 
       function getImage(thumbnail, ext) {
@@ -30,12 +29,14 @@
             hero.thumbnail.extension
           )}" />
           <span>${hero.name}</span>
+          <a href="details-FINISHED.html?id=${hero.id}">Details</a>
         </section>
         `;
       }
 
       function showComics() {
         const heroes = JSON.parse(localStorage.getItem("heroes"));
+
         const clickedHero = heroes.find(
           (hero) => hero.id === parseInt(this.dataset.heroId)
         );
@@ -44,22 +45,29 @@
       }
 
       function render() {
-        return fetch(
-          `https://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}`
-        )
-          .then((res) => res.json())
-          .then((res) => res.data.results)
-          .then((res) => {
-            localStorage.setItem("heroes", JSON.stringify(res));
-            return res;
-          })
-          .then((heros) => heros.map((hero) => cardFactory(hero)))
-          .then((cards) => (heroes.innerHTML = cards.join("")))
-          .then(() => {
-            const allHeroes = document.querySelectorAll(".hero");
-            allHeroes.forEach((h) => h.addEventListener("click", showComics));
-          })
-          .catch(console.log);
+        return (
+          fetch(
+            `https://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}`
+          )
+            .then((res) => res.json())
+
+            .then((res) => res.data.results)
+            //.then((res) => res.data.results[0].comics.items[0].name)
+
+            .then((res) => {
+              localStorage.setItem("heroes", JSON.stringify(res));
+              return res;
+            })
+            .then((heros) => heros.map((hero) => cardFactory(hero)))
+
+            .then((hero) => (heroes.innerHTML = hero.join("")))
+
+            .then(() => {
+              const allHeroes = document.querySelectorAll(".hero");
+              allHeroes.forEach((h) => h.addEventListener("click", showComics));
+            })
+            .catch(console.log)
+        );
       }
 
       render();

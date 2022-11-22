@@ -4,7 +4,11 @@ console.log("~~~~~~~~~~~~~~TASK 1~~~~~~~~~~~~~~");
  * For inspiration what you can create, look around you 👀.
  * Some examples: furniture, animal, chair, teacher, student, person, tree, movie,...
  */
-
+function Cat() {
+  this.name = "lucky";
+}
+let cat1 = new Cat();
+alert(cat1.name);
 console.log("~~~~~~~~~~~~~~TASK 2~~~~~~~~~~~~~~");
 /**
  * Initialize all those classes you defined above using the new keyword.

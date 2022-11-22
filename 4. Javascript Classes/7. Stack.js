@@ -14,12 +14,16 @@ class Stack {
    * Removes the value at the end of the stack and returns it
    * @return {*} the last and newest value in the stack
    */
-  pop() {}
+  pop() {
+    return this.#storage.pop();
+  }
   /*
    * Returns the value at the end of the stack without removing it
    * @return {*} the last and newest value in the stack
    */
-  peek() {}
+  peek() {
+    const lastValue = this.#storage[thsi];
+  }
 }
 
 const myStack = new Stack();

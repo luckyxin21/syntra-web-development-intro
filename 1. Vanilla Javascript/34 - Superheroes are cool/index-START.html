@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <section class="hero">Marvel Hero</section>
+    <section class="hero-banner">Marvel Hero</section>
     <section class="heroes"></section>
 
     <script>
@@ -17,13 +17,12 @@
       //2. Create an API Key and add valid domain *
       //3. Store your public Api Key here
 
-      const heroes = document.querySelector(".heroes");
       const publicKey = "8295e16cec97db77f54e2367b9d40465";
-      const hash = "691ae2d73667f8befdac53ec0cc28af3";
+      const heroes = document.querySelector(".heroes");
       const ts = 1;
 
       //4. Get the md5 hash of ts-privateKey-publicKey via here: https://www.md5hashgenerator.com/
-
+      const hash = "691ae2d73667f8befdac53ec0cc28af3";
       //5. Create a function that takes in the thumbnail of a hero
       // and creates a path to the full image (see here: https://developer.marvel.com/documentation/images)
       function getImage(thumbnail, ext) {
@@ -31,30 +30,27 @@
       }
       function cardFactory(hero) {
         return `
-        //<section class="hero" data-hero-id="1">
-        //  <img src="http://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16.jpg" />
-        //  <span>Name</span>
-        //  <a target="_blank" href="details-START.html?id=1">Details</a>
-        //</section>
 
-        <section class="hero" data-hero-id=${hero.id}>
-            <img src="${getImage(
-              hero.thumbnail.path,
-              hero.thumbnail.extension
-            )}" />
-            <span>${hero.name}</span>
+             <section class="hero" data-hero-id="${hero.id}">
+                <img src="${getImage(
+                  hero.thumbnail.path,
+                  hero.thumbnail.extension
+                )}"/>
 
-          </section>
-          `;
+                <span>${hero.name}</span>
+
+              
+                <a href="details-START.html?id=${hero.id}">details</a>
+            </section>
+                `;
       }
       function showComics() {
         const heroes = JSON.parse(localStorage.getItem("heroes"));
         const clickedHero = heroes.find(
           (hero) => hero.id === parseInt(this.dataset.heroId)
         );
-
         const comics = clickedHero.comics;
-        alert(comics.items.map((item) => item.name).join(","));
+        alert(comics.items.map((item) => item.name).join("///"));
       }
 
       //6. Write a function called render that
@@ -62,30 +58,35 @@
       // b. Store those heroes in localStorage
       // c. Selects all the heroes rendered and attaches a click handler that alerts the comics
       function render() {
-        fetch(
-          `https://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}`
-        )
-          .then((res) => res.json())
-          .then((res) => res.data.results)
+        return (
+          fetch(
+            `http://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}`
+          )
+            .then((res) => res.json())
 
-          .then((res) => {
-            localStorage.setItem("heroes", JSON.stringify(res));
-            return res;
-          })
-          .then((heros) => heros.map((hero) => cardFactory(hero)))
-          .then((cards) => {
-            heroes.innerHTML = cards.join("");
-          })
-          .then(() => {
-            const allHeroes = document.querySelectorAll(".hero");
-            allHeroes.forEach((hero) =>
-              hero.addEventListener("click", showComics)
-            );
-          });
+            .then((res) => res.data.results)
+            .then(console.log)
+            .then((res) => {
+              localStorage.setItem("heroes", JSON.stringify(res));
 
-        //https://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}
+              return res;
+            })
+            //.then(console.log)
+            .then((heros) => heros.map((hero) => cardFactory(hero)))
+
+            .then((cards) => (heroes.innerHTML = cards.join("")))
+            .then(() => {
+              const allHeros = document.querySelectorAll(".hero");
+
+              allHeros.forEach((hero) => {
+                hero.addEventListener("click", showComics);
+              });
+            })
+            .catch(console.log)
+        );
       }
       render();
+
       //7. Use this factory to show the name and image of every hero you fetch
 
       //8. Create a second HTML page that shows the details of a hero
