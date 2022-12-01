@@ -80,6 +80,17 @@
         return new Date(seconds * 1000).toISOString().substr(0);
       };
       console.log(getTime(timeInSeconds));
+
+      class Person {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+        sayName() {
+          console.log(this.name);
+        }
+      }
+      console.log(new Person("xin", 21));
     </script>
   </body>
 </html>
