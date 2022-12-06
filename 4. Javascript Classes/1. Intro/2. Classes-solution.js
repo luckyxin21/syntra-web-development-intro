@@ -14,8 +14,8 @@ class Calculator {
     this.total = start || 0;
   }
 
-  add(x, y) {
-    this.total = this.total + (x + y);
+  add() {
+    this.total = this.total += number;
     return this;
   }
 
@@ -27,5 +27,10 @@ class Calculator {
   display() {
     console.log(this.total);
     return this.total;
+  }
+}
+class Cacul extends Caculator {
+  constructor(total) {
+    super(total);
   }
 }

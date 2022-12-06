@@ -4,11 +4,7 @@ console.log("~~~~~~~~~~~~~~TASK 1~~~~~~~~~~~~~~");
  * For inspiration what you can create, look around you 👀.
  * Some examples: furniture, animal, chair, teacher, student, person, tree, movie,...
  */
-function Cat() {
-  this.name = "lucky";
-}
-let cat1 = new Cat();
-alert(cat1.name);
+
 console.log("~~~~~~~~~~~~~~TASK 2~~~~~~~~~~~~~~");
 /**
  * Initialize all those classes you defined above using the new keyword.
@@ -43,8 +39,20 @@ console.log("~~~~~~~~~~~~~~TASK 6~~~~~~~~~~~~~~");
  * Create a calculator class using a fluent API
  * that does something like this:
  * calc
-    .add(1, 2)
+    .add(1)
     .square()
     .display();
  */
-class Calculator {}
+class Calculator {
+  constructor() {
+    this.totle = 0;
+  }
+  add(number) {
+    this.totle += number;
+    return this;
+  }
+  get display() {
+    return this.total;
+  }
+}
+const calc = new Calculator().add(1);
