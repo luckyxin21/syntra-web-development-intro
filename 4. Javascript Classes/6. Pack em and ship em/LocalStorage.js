@@ -10,4 +10,6 @@
  * Remember to use JSON.stringify() and JSON.parse() when storing and retrieving objects.
  *
  * @example use the LocalStorage class in our Vanilla Javascript/06 LocalStorage to see if it worked
+ *
+ * @example new localStorage().get({key1:"", key2:null})
  */
